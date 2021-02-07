@@ -1,0 +1,51 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=B612&display=swap" rel="stylesheet">
+    <title>Book Finder</title>
+</head>
+<body>
+    
+    <div id="container">
+        <h1 id="title_txt">Book Finder</h1>
+        <form method="GET">
+            <input type="hidden" name="submit" name="" id="">
+            <div id="inputs_container">
+                <input id="title_in" name="title" required placeholder="Title" type="text" >
+                <input id="author_in" name="author" placeholder="Author" type="text" >
+            </div>
+            <input id="find_btn" class="btn" type="submit" value="Find">
+        </form>
+        <div id="books_container">
+            {% for book in books%}
+            <div class="book">
+                <a href={{book.thumbnail}}><img src={{book.thumbnail}}  class="thumbnail" alt=""></a>
+                <div class="book_info">
+                    <div class="book_title">
+                        <h4>{{book.title}}</h4>
+                        <h4>By: <span class="author_name">{{book.author}}</span> </h4>
+                    </div>
+                     <div class="publish_date"><h4>Published: <span class="date"> {{book.publish_date}} </span></h4></div>
+                     <div class="book_links">
+                        <a href={{book.prev_link}} target="_blank" class="btn">Buy book</a>
+                        <a href={{book.read}} target="_blank" class="btn">Read Online</a>
+                         
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      
+            
+        </div>
+    </div>
+    
+   
+</body>
+</html>
