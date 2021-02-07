@@ -18,7 +18,7 @@ def index(request):
         
         response=requests.get(url)
         data=response.json()
-       
+        
         
         if('error' in data):  #api responded with error
             
@@ -29,14 +29,31 @@ def index(request):
             
             for i in range(len(items)):
                 curr=items[i]
+                book=Book()
+                book.title=curr["volumeInfo"]["title"]
+                
                 if "imageLinks" in curr["volumeInfo"]:
-                    book=Book(curr["volumeInfo"]["title"],curr["volumeInfo"]["authors"][0],
-                    curr["volumeInfo"]["imageLinks"]["thumbnail"],curr["volumeInfo"]["publishedDate"],
-                    curr["volumeInfo"]["previewLink"],curr["accessInfo"]["webReaderLink"])
+                    book.thumbnail=curr["volumeInfo"]["imageLinks"]["thumbnail"]
                 else:
-                    book=Book(curr["volumeInfo"]["title"],curr["volumeInfo"]["authors"][0],
-                    "none",curr["volumeInfo"]["publishedDate"],curr["volumeInfo"]["previewLink"],curr["accessInfo"]["webReaderLink"])
+                    # book=Book(curr["volumeInfo"]["title"],curr["volumeInfo"]["authors"][0],
+                    # "none",curr["volumeInfo"]["publishedDate"],curr["volumeInfo"]["previewLink"],curr["accessInfo"]["webReaderLink"])
+                    book.thumbnail=""
+                
+                if "authors" in curr["volumeInfo"]:
+                    book.author=curr["volumeInfo"]["authors"][0]
+                else:
+                    book.author="not available"
+                    
+                if "publishedDate" in curr["volumeInfo"]:
+                    book.publish_date=curr["volumeInfo"]["publishedDate"]
+                else:
+                    book.publish_date="not available"
+                
+                book.prev_link= curr["volumeInfo"]["previewLink"]
+                book.read=curr["accessInfo"]["webReaderLink"]
+                      
                 books.append(book)
+                
             return render(request,"index.html",{"books":books})  
             
         
