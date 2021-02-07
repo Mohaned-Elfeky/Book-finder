@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'j+exfy$q#d5iu44rx0vgsxok#k@7s6kqcrfn7$r@gmfyyth$8-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','book-finder-api.herokuapp.com']
 
