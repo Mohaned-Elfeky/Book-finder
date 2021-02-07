@@ -1,19 +1,21 @@
 from django.shortcuts import render
 import requests
 from .models import Book
+import os
 
 # Create your views here.
 def index(request):
     error=""
     books=[]
-        
+    api_key=os.environ['google_api_key']
+    
     if 'submit' in request.GET:   # request from form
         title=request.GET["title"]
         if request.GET["author"] == "" :
-          url="https://www.googleapis.com/books/v1/volumes?q="+title+"&key=AIzaSyBhBb7Y2OWtKmzf-qSfQZX9cFV3yDg1mr0"
+          url="https://www.googleapis.com/books/v1/volumes?q="+title+"&key="+api_key
         else:
             author=request.GET["author"]
-            url="https://www.googleapis.com/books/v1/volumes?q="+title+"+inauthor:"+author+"&key=AIzaSyBhBb7Y2OWtKmzf-qSfQZX9cFV3yDg1mr0"
+            url="https://www.googleapis.com/books/v1/volumes?q="+title+"+inauthor:"+author+"&key="+api_key
         
         
         response=requests.get(url)
