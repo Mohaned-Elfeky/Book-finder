@@ -25,7 +25,7 @@ SECRET_KEY = 'j+exfy$q#d5iu44rx0vgsxok#k@7s6kqcrfn7$r@gmfyyth$8-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','https://book-finder-api.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1','book-finder-api.herokuapp.com']
 
 
 # Application definition
